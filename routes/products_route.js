@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
 import { addProduct, getAllProcuts, getSingleShoe } from "../controllers/product_controller.js";
-import { newUser ,Login, userInfo } from '../controllers/user_controller.js';
+import { newUser ,Login, userInfo, Logout, updateUser } from '../controllers/user_controller.js';
 import { Auth } from '../middleware/auth.js';
 import { newOrder,getOrders } from '../controllers/order_controller.js';
 
@@ -26,6 +26,8 @@ route.get('/getOrders',Auth,getOrders)
 route.post('/newUser',newUser)
 route.post('/login',Login)
 route.get('/userInfo',Auth,userInfo)
+route.get('/Logout',Auth,Logout)
+route.post('/updateUser',Auth,updateUser)
 
 
 
