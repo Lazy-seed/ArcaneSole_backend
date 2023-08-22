@@ -88,11 +88,22 @@ export const Login = async (req, res) => {
 export const userInfo = async (req, res) => {
 
     const userInfo = req.rootuser;
-    res.status(200).json({
-        success: true,
-        msg: "user info",
-        userInfo
-    })
+
+    if (userInfo) {
+        
+        res.status(200).json({
+            success: true,
+            msg: "user info",
+            userInfo
+        })
+    }
+    else{
+        res.status(200).json({
+            success: false,
+            msg: "user not login info",
+            
+        })
+    }
 
 }
 

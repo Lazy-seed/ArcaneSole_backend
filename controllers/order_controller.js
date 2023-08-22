@@ -2,12 +2,12 @@ import order_model from "../models/order_model.js";
 
 
 export const newOrder = async (req, res) => {
-    const {items} = req.body;
+    const {items,charge,total} = req.body;
 
     const userID=req.userID
 
     console.log(userID);
-    const order=await order_model.create({items,user_id:userID});
+    const order=await order_model.create({items,charge,total,user_id:userID});
 
     res.status(200).json({
         success: true,
@@ -16,6 +16,8 @@ export const newOrder = async (req, res) => {
     })
 
 }
+
+//  see orders
 export const getOrders = async (req, res) => {
 
     const userID=req.userID

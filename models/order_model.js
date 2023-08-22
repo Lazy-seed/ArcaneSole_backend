@@ -41,6 +41,15 @@ const order = new mongoose.Schema({
                 },
             }
         ],
+        
+    charge: {
+        type: Number,
+        default: 0
+    },
+    total: {
+        type: Number,
+        default: 0
+    },
     house: {
         type: String,
         default: ""
