@@ -59,3 +59,37 @@ export const getSingleShoe = async (req, res) =>{
             data
         })
 }
+
+
+
+
+// srch
+// export const SearchSong = async (req, res) => {
+//     const srch = req.params.srch.toLowerCase();
+
+//     const result = await songSchema.find(
+//         {
+//             "$or": [
+//                 { "playlist_name": { $regex: srch } },
+//                 { "catg": { $regex: srch } },
+//                 { "name": { $regex: srch } }
+//             ]
+//         }
+//     )
+
+//     if (result.length != 0) {
+//         res.status(200).json({
+//             success: true,
+//             msg: "get catg songs",
+//             result
+//         })
+//     } else {
+//         res.status(200).json({
+//             success: false,
+//             msg: "fail to get catg songs",
+//             result:''
+            
+//         })
+//     }
+
+// }

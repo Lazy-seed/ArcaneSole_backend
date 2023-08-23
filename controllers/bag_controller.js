@@ -53,6 +53,22 @@ export const addBag = async (req, res) => {
 }
 
 
+// upt bag item 
+export const uptBag = async (req,res)=>{
+    const {size,qty,pID}=req.body;
+
+    const result = await bag_model.findOneAndUpdate({_id:pID},{$set:{size:size,qty:qty}},{ returnNewDocument: true });
+
+
+
+    res.status(200).json({
+        success:true,
+        msg:"updt bag item",
+        result
+    })
+}
+
+
 
 // see bag
 export const getBag = async (req, res) => {
