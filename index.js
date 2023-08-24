@@ -4,6 +4,7 @@ import route from "./routes/products_route.js";
 import DB_connection from "./config/db.js";
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
+import payment_router from "./routes/payment.js";
 const app=express();
 DB_connection()
 
@@ -22,4 +23,6 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 
 
-app.use('/api', route)
+app.use('/api', route);
+// payment
+app.use('/payment', payment_router);
