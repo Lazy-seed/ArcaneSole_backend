@@ -53,6 +53,7 @@ export const getSingleShoe = async (req, res) =>{
 
     const data =await product_model.findById(id)
 
+    const upt_viewed= await product_model.findByIdAndUpdate({_id:id},{$set:{viewed:data.viewed+1}})
         res.status(200).json({
             success: true,
             msg: "single shoe",
@@ -64,32 +65,39 @@ export const getSingleShoe = async (req, res) =>{
 
 
 // srch
-// export const SearchSong = async (req, res) => {
-//     const srch = req.params.srch.toLowerCase();
+export const SearchShoe = async (req, res) => {
+    const srch = req.params.srch
 
-//     const result = await songSchema.find(
-//         {
-//             "$or": [
-//                 { "playlist_name": { $regex: srch } },
-//                 { "catg": { $regex: srch } },
-//                 { "name": { $regex: srch } }
-//             ]
-//         }
-//     )
 
-//     if (result.length != 0) {
-//         res.status(200).json({
-//             success: true,
-//             msg: "get catg songs",
-//             result
-//         })
-//     } else {
-//         res.status(200).json({
-//             success: false,
-//             msg: "fail to get catg songs",
-//             result:''
+    try {
+        
+    
+    const result = await product_model.find(
+        {
+            "$or": [
+                { "name": { $regex: srch ,'$options' : 'i'} },
+                { "category": { $regex: srch ,'$options' : 'i'}   },
+                { "color": { $regex: srch ,'$options' : 'i'}   }
+            ]
+        }
+    )
+
+    if (result.length != 0) {
+        res.status(200).json({
+            success: true,
+            msg: "get catg shoes",
+            result
+        })
+    } else {
+        res.status(200).json({
+            success: false,
+            msg: "fail to get catg shoe",
+            result:''
             
-//         })
-//     }
+        })
+    }
+} catch (error) {
+        console.log(error);
+}
 
-// }
+}
