@@ -6,7 +6,7 @@ export const addProduct = async (req, res) => {
 
     const data = req.body
 
-    console.log(data);
+    // console.log(data);
     const product = await product_model.create(data);
     res.status(200).json({
         success: true,
@@ -22,7 +22,7 @@ export const getAllProcuts = async (req, res) => {
 
     const ctg = req.params.ctg;
 
-    console.log(ctg);
+    // console.log(ctg);
 
 
     if (ctg == 'men' || ctg == 'women' || ctg == 'girl' || ctg == 'boy') {

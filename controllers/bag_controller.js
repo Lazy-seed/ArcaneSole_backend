@@ -20,7 +20,7 @@ export const addBag = async (req, res) => {
         const newQty = exist.qty + 1;
         const res = await exist.updateOne({ qty: newQty })
 
-        console.log(res);
+        // console.log(res);
     }
 
     else {

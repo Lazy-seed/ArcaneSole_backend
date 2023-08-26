@@ -129,7 +129,7 @@ export const Logout = async (req, res) => {
 export const updateUser = async (req, res) => {
 
     const newData = req.body;
-    console.log(newData);
+    // console.log(newData);
     const userID = req.userID
     const newuser = await userSchema.findByIdAndUpdate({ _id: userID }, newData, { new: true })
 

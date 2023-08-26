@@ -18,7 +18,7 @@ export const newOrder = async (req, res) => {
         total += item.price;
         items.push(item);
     });
-    console.log(address);
+    // console.log(address);
     //    make order
     const order = await order_model.create({ items, charge, total,address, user_id: userID });
 
