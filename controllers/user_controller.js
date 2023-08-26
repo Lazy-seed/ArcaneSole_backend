@@ -45,7 +45,6 @@ export const newUser = async (req, res) => {
 export const Login = async (req, res) => {
     const { email, password } = req.body
     const result = await userSchema.findOne({ email: email })
-
     if (result) {
         // const token =await  result.generateAuthToken()
         const JWT_KEY = process.env.JWT_KEY;

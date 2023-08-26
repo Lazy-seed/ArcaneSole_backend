@@ -75,6 +75,7 @@ export const getBag = async (req, res) => {
 
     const userID = req.userID
 
+
     const bagItems = await bag_model.find({ user_id: userID });
 
     if (bagItems) {
@@ -88,7 +89,7 @@ export const getBag = async (req, res) => {
     else {
         res.status(200).json({
             success: false,
-            msg: " xxx  all bag itmes ",
+            msg: " xxx   bag itmes ",
         })
     }
 

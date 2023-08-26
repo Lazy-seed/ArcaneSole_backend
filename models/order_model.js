@@ -41,7 +41,7 @@ const order = new mongoose.Schema({
                 },
             }
         ],
-        
+
     charge: {
         type: Number,
         default: 0
@@ -50,25 +50,28 @@ const order = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    house: {
-        type: String,
-        default: ""
-    },
-    area: {
-        type: String,
-        default: ""
-    },
-    city: {
-        type: String,
-        default: ""
-    },
-    state: {
-        type: String,
-        default: ""
-    },
-    pincde: {
-        type: Number,
-        default: 0
+    addres: {
+
+        house: {
+            type: String,
+            default: ""
+        },
+        area: {
+            type: String,
+            default: ""
+        },
+        city: {
+            type: String,
+            default: ""
+        },
+        state: {
+            type: String,
+            default: ""
+        },
+        pincode: {
+            type: Number,
+            default: 0
+        }
     }
 })
 
