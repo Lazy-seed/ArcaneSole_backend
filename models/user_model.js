@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const user = new mongoose.Schema({
+    img: {
+        type: String
+    },
     fname: {
         type: String
     },
