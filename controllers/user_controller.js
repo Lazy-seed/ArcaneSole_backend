@@ -52,7 +52,7 @@ export const Login = async (req, res) => {
         const token = jwt.sign({ _id: result._id }, JWT_KEY);
         const tokenAdd = await userSchema.findByIdAndUpdate({ _id: result._id }, { $push: { tokens: { token: token } } })
         const updated_user = await tokenAdd.save();
-        res.cookie("jwtoken", token, { expires: new Date(Date.now() + 999999), httpOnly: true, })
+        res.cookie("jwtoken", token, { expires: new Date(Date.now() + 99999999), httpOnly: true, })
 
         if (result.password === password) {
 
