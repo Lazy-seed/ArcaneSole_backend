@@ -72,6 +72,10 @@ const order = new mongoose.Schema({
             type: Number,
             default: 0
         }
+    },
+    orderDate: {
+        type: Date,
+        default: Date.now()
     }
 })
 
