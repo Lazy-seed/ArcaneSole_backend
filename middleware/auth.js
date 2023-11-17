@@ -10,7 +10,7 @@ export const Auth = async (req, res, next) => {
         const token = req.cookies.jwtoken;
 
     
-        const JWT_KEY=process.env.JWT_KEY;
+        const JWT_KEY=HellThisIsMyPrivateKey;
         
         const verfiyToken = jwt.verify(token, JWT_KEY);
         const rootuser = await userSchema.findOne({ _id: verfiyToken._id });
