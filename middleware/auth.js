@@ -9,12 +9,12 @@ export const Auth = async (req, res, next) => {
 
         const token = req.cookies.jwtoken;
 
-    
-        const JWT_KEY='HellThisIsMyPrivateKey';
-        
+        console.log("loacl token", token);
+        const JWT_KEY = 'HellThisIsMyPrivateKey';
+
         const verfiyToken = jwt.verify(token, JWT_KEY);
         const rootuser = await userSchema.findOne({ _id: verfiyToken._id });
-
+        
         if (!rootuser) { throw new Error('user not foind') };
         // console.log(rootuser);
         req.token = token
@@ -26,8 +26,8 @@ export const Auth = async (req, res, next) => {
         // console.log(error);
         console.log("user not loggein");
         res.status(200).json({
-            success:false,
-            msg:"user not loggin"
+            success: false,
+            msg: "user not loggin"
 
         })
     }
