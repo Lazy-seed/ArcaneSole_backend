@@ -52,7 +52,7 @@ export const Login = async (req, res) => {
         const token = jwt.sign({ _id: result._id }, JWT_KEY);
         const tokenAdd = await userSchema.findByIdAndUpdate({ _id: result._id }, { $push: { tokens: { token: token } } })
         const updated_user = await tokenAdd.save();
-        res.cookie("jwtoken", token, { expires: new Date(Date.now() + 99999999), httpOnly: true,secure: true,sameSite: 'none' })
+        res.cookie("jwtoken", token, { expires: new Date(Date.now() + 7*24*60*60*1000), httpOnly: true,secure: true,sameSite: 'none' })
 
         if (result.password === password) {
 
@@ -118,7 +118,7 @@ export const Logout = async (req, res) => {
     const remToken = await userSchema.findOneAndUpdate({ _id: userInfo._id }, { $set: { tokens: [] } })
 
 
-    res.clearCookie('jwtoken', { path: '/' });
+    res.clearCookie('jwtoken', { path: '/' ,httpOnly: true,secure: true,sameSite: 'none' });
     res.status(200).send('user logout');
 }
 
