@@ -47,7 +47,7 @@ export const Login = async (req, res) => {
     const result = await userSchema.findOne({ email: email })
     if (result) {
         // const token =await  result.generateAuthToken()
-        const JWT_KEY = HellThisIsMyPrivateKey;
+        const JWT_KEY = 'HellThisIsMyPrivateKey';
 
         const token = jwt.sign({ _id: result._id }, JWT_KEY);
         const tokenAdd = await userSchema.findByIdAndUpdate({ _id: result._id }, { $push: { tokens: { token: token } } })
