@@ -18,12 +18,15 @@ export const addBag = async (req, res) => {
 
     if (exist) {
         const newQty = exist.qty + 1;
-        const res = await exist.updateOne({ qty: newQty })
+        const uptBag = await exist.updateOne({ qty: newQty })
 
         // console.log(res);
-    }
-
-    else {
+        res.status(200).json({
+            success: true,
+            msg: "item upt",
+            uptBag
+        })
+    } else {
 
         const bagItem = await bag_model.create({
             shoe_id,
@@ -54,16 +57,12 @@ export const addBag = async (req, res) => {
 
 
 // upt bag item 
-export const uptBag = async (req,res)=>{
-    const {size,qty,pID}=req.body;
-
-    const result = await bag_model.findOneAndUpdate({_id:pID},{$set:{size:size,qty:qty}},{ returnNewDocument: true });
-
-
-
+export const uptBag = async (req, res) => {
+    const { size, qty, pID } = req.body;
+    const result = await bag_model.findOneAndUpdate({ _id: pID }, { $set: { size: size, qty: qty } }, { returnNewDocument: true });
     res.status(200).json({
-        success:true,
-        msg:"updt bag item",
+        success: true,
+        msg: "updt bag item",
         result
     })
 }
@@ -72,14 +71,9 @@ export const uptBag = async (req,res)=>{
 
 // see bag
 export const getBag = async (req, res) => {
-
     const userID = req.userID
-
-
     const bagItems = await bag_model.find({ user_id: userID });
-
     if (bagItems) {
-
         res.status(200).json({
             success: true,
             msg: "all bag itmes ",
@@ -92,7 +86,31 @@ export const getBag = async (req, res) => {
             msg: " xxx   bag itmes ",
         })
     }
+}
 
+// see bag
+export const getBagPrice = async (req, res) => {
+    const userID = req.userID
+    const bagItems = await bag_model.find({ user_id: userID });
+    let totalPrice = 0
+    bagItems.map((data) => {
+        console.log(data);
+        totalPrice += data.price * data.qty
+    })
+    if (bagItems) {
+        res.status(200).json({
+            success: true,
+            msg: "total price",
+            totalPrice
+        })
+    }
+    else {
+        res.status(200).json({
+            success: false,
+            msg: "fail total price",
+
+        })
+    }
 }
 
 
@@ -100,14 +118,14 @@ export const getBag = async (req, res) => {
 // del bag
 export const delBag = async (req, res) => {
 
-const {id}=req.params;
+    const { id } = req.params;
 
-const item = await bag_model.deleteOne({_id:id});
+    const item = await bag_model.deleteOne({ _id: id });
 
-res.status(200).json({
-    succes:true,
-    msg:"item del"
-})
+    res.status(200).json({
+        succes: true,
+        msg: "item del"
+    })
 
 
 
