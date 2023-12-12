@@ -21,9 +21,8 @@ export const addProduct = async (req, res) => {
 export const getAllProcuts = async (req, res) => {
 
     const ctg = req.params.ctg;
-
-    // console.log(ctg);
-
+    const page = 1;
+    const perPage = 6;
 
     if (ctg == 'men' || ctg == 'women' || ctg == 'girl' || ctg == 'boy') {
         const products = await product_model.find({ category: ctg });
@@ -33,10 +32,12 @@ export const getAllProcuts = async (req, res) => {
             products
         })
     } else {
-        const products = await product_model.find();
-        res.status(200).json({
+        const products = await product_model.find().skip((page - 1) * perPage).limit(perPage);
+        const len = products.length
+     res.status(200).json({
             success: true,
             msg: "get all shoes",
+            len,
             products
         })
     }
@@ -47,18 +48,18 @@ export const getAllProcuts = async (req, res) => {
 // single shoe
 
 
-export const getSingleShoe = async (req, res) =>{
+export const getSingleShoe = async (req, res) => {
 
-    const id=req.params.id;
+    const id = req.params.id;
 
-    const data =await product_model.findById(id)
+    const data = await product_model.findById(id)
 
-    const upt_viewed= await product_model.findByIdAndUpdate({_id:id},{$set:{viewed:data.viewed+1}})
-        res.status(200).json({
-            success: true,
-            msg: "single shoe",
-            data
-        })
+    const upt_viewed = await product_model.findByIdAndUpdate({ _id: id }, { $set: { viewed: data.viewed + 1 } })
+    res.status(200).json({
+        success: true,
+        msg: "single shoe",
+        data
+    })
 }
 
 
@@ -70,34 +71,34 @@ export const SearchShoe = async (req, res) => {
 
 
     try {
-        
-    
-    const result = await product_model.find(
-        {
-            "$or": [
-                { "name": { $regex: srch ,'$options' : 'i'} },
-                { "category": { $regex: srch ,'$options' : 'i'}   },
-                { "color": { $regex: srch ,'$options' : 'i'}   }
-            ]
-        }
-    )
 
-    if (result.length != 0) {
-        res.status(200).json({
-            success: true,
-            msg: "get catg shoes",
-            result
-        })
-    } else {
-        res.status(200).json({
-            success: false,
-            msg: "fail to get catg shoe",
-            result:''
-            
-        })
-    }
-} catch (error) {
+
+        const result = await product_model.find(
+            {
+                "$or": [
+                    { "name": { $regex: srch, '$options': 'i' } },
+                    { "category": { $regex: srch, '$options': 'i' } },
+                    { "color": { $regex: srch, '$options': 'i' } }
+                ]
+            }
+        )
+
+        if (result.length != 0) {
+            res.status(200).json({
+                success: true,
+                msg: "get catg shoes",
+                result
+            })
+        } else {
+            res.status(200).json({
+                success: false,
+                msg: "fail to get catg shoe",
+                result: ''
+
+            })
+        }
+    } catch (error) {
         console.log(error);
-}
+    }
 
 }

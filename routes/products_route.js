@@ -3,7 +3,7 @@ import { SearchShoe, addProduct, getAllProcuts, getSingleShoe } from "../control
 import { newUser ,Login, userInfo, Logout, updateUser } from '../controllers/user_controller.js';
 import { Auth } from '../middleware/auth.js';
 import { newOrder,getOrders } from '../controllers/order_controller.js';
-import { addBag, delBag, getBag, uptBag } from '../controllers/bag_controller.js';
+import { addBag, delBag, getBag, getBagPrice, uptBag } from '../controllers/bag_controller.js';
 
 
 
@@ -23,6 +23,7 @@ route.get('/SearchShoe/:srch',SearchShoe)
 // Bag
 route.post('/addBag',Auth,addBag);
 route.get('/getBag',Auth,getBag);
+route.get('/getBagPrice',Auth,getBagPrice);
 route.get('/delBag/:id',Auth,delBag);
 route.post('/uptBag',Auth,uptBag);
 

@@ -9,7 +9,6 @@ export const Auth = async (req, res, next) => {
 
         const token = req.cookies.jwtoken;
 
-        console.log("loacl token", token);
         const JWT_KEY = 'HellThisIsMyPrivateKey';
 
         const verfiyToken = jwt.verify(token, JWT_KEY);
