@@ -18,7 +18,7 @@ app.listen(8000,()=>{
 
 
 
-app.use(cors({ credentials: true, origin: ['http://localhost:3000','http://localhost:3001','https://arcanesole.netlify.app'] }));
+app.use(cors({ credentials: true, origin: ['http://localhost:3000','http://localhost:3001','https://arcanesole.netlify.app','http://192.168.252.1:3000'] }));
 // app.use(cors({ credentials: true, origin: 'https://landingpage77.netlify.app' }));
 
 

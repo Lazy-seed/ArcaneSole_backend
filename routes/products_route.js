@@ -1,5 +1,5 @@
 import express, { Router } from 'express'
-import { SearchShoe, addProduct, getAllProcuts, getSingleShoe } from "../controllers/product_controller.js";
+import { SearchShoe, addProduct, getAllProcuts, getRandomProducts, getSingleShoe } from "../controllers/product_controller.js";
 import { newUser ,Login, userInfo, Logout, updateUser } from '../controllers/user_controller.js';
 import { Auth } from '../middleware/auth.js';
 import { newOrder,getOrders } from '../controllers/order_controller.js';
@@ -13,9 +13,10 @@ const route=Router()
 //  shoes
 
 route.post('/addProduct',addProduct)
-route.get('/allProducts/:ctg',getAllProcuts)
+route.get('/allProducts/:ctg/:page',getAllProcuts)
 route.get('/singleShoe/:id',getSingleShoe)
 route.get('/SearchShoe/:srch',SearchShoe)
+route.get('/randomProducts/:num',getRandomProducts)
 
 
 

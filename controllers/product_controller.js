@@ -16,12 +16,41 @@ export const addProduct = async (req, res) => {
 }
 
 
+export const getRandomProducts = async (req, res) => {
+    try {
+        const num = 9;
+        const products = await product_model.aggregate([
+            { $sample: { size: num } }
+        ]);
+
+        if (products.length > 0) {
+            res.status(200).json({
+                success: true,
+                msg: `Get ${num} random shoes`,
+                products
+            });
+        } else {
+            res.status(404).json({
+                success: false,
+                msg: "No random shoes found"
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            msg: "Internal Server Error"
+        });
+    }
+}
+
+
 
 // get all products
 export const getAllProcuts = async (req, res) => {
 
     const ctg = req.params.ctg;
-    const page = 1;
+    const page = req.params.page;
     const perPage = 6;
 
     if (ctg == 'men' || ctg == 'women' || ctg == 'girl' || ctg == 'boy') {
@@ -33,11 +62,12 @@ export const getAllProcuts = async (req, res) => {
         })
     } else {
         const products = await product_model.find().skip((page - 1) * perPage).limit(perPage);
-        const len = products.length
-     res.status(200).json({
+        const allPro = await product_model.find()
+        const proLen = allPro.length
+        res.status(200).json({
             success: true,
             msg: "get all shoes",
-            len,
+            proLen,
             products
         })
     }
