@@ -8,15 +8,7 @@ const bag = new mongoose.Schema({
         default: ""
     },
 
-    shoe_id: {
-        type: String,
-        default: ""
-    },
-    name: {
-        type: String,
-        default: ""
-    },
-    img1: {
+    size: {
         type: String,
         default: ""
     },
@@ -24,17 +16,10 @@ const bag = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    size: {
-        type: Number,
-        default: 0
-    },
-    price: {
-        type: Number,
-        default: 0
-    },
-    status: {
-        type: String,
-        default: "packing"
+    product: {
+        type: mongoose.Schema.ObjectId,
+        required: true,
+        ref: "shoes"
     }
 
 })

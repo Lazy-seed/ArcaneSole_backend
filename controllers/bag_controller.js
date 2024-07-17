@@ -1,19 +1,15 @@
 import bag_model from "../models/bag_model.js";
+import product_schema from "../models/product_model.js";
 
 
 
 
 //  add item in bag
 export const addBag = async (req, res) => {
-    const { shoe_id,
-        name,
-        img1,
-        qty,
-        size,
-        price } = req.body;
+    const { shoe_id, qty, size, } = req.body;
     const userID = req.userID
 
-
+    const product = await product_schema.findOne({ _id: shoe_id })
     const exist = await bag_model.findOne({ shoe_id: shoe_id });
 
     if (exist) {
@@ -29,17 +25,14 @@ export const addBag = async (req, res) => {
     } else {
 
         const bagItem = await bag_model.create({
-            shoe_id,
-            name,
-            img1,
+            product :shoe_id,
             qty,
             size,
-            price, user_id: userID
+            user_id: userID
         });
 
 
         if (bagItem) {
-
             res.status(200).json({
                 success: true,
                 msg: "item add to bag",
@@ -72,7 +65,7 @@ export const uptBag = async (req, res) => {
 // see bag
 export const getBag = async (req, res) => {
     const userID = req.userID
-    const bagItems = await bag_model.find({ user_id: userID });
+    const bagItems = await bag_model.find({ user_id: userID }).populate("product");
     if (bagItems) {
         res.status(200).json({
             success: true,
@@ -91,11 +84,10 @@ export const getBag = async (req, res) => {
 // see bag
 export const getBagPrice = async (req, res) => {
     const userID = req.userID
-    const bagItems = await bag_model.find({ user_id: userID });
+    const bagItems = await bag_model.find({ user_id: userID }).populate('product');
     let totalPrice = 0
     bagItems.map((data) => {
-        console.log(data);
-        totalPrice += data.price * data.qty
+        totalPrice += data.product.price * data.qty
     })
     if (bagItems) {
         res.status(200).json({

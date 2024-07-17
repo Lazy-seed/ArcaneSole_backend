@@ -7,39 +7,12 @@ const order = new mongoose.Schema({
         type: String,
         default: ""
     },
+    orderStatus:{
+        type:String,
+        default:"packing"
+    },  
     items:
         [
-            {
-
-                shoe_id: {
-                    type: String,
-                    default: ""
-                },
-                name: {
-                    type: String,
-                    default: ""
-                },
-                img1: {
-                    type: String,
-                    default: ""
-                },
-                qty: {
-                    type: Number,
-                    default: 0
-                },
-                size: {
-                    type: Number,
-                    default: 0
-                },
-                price: {
-                    type: Number,
-                    default: 0
-                },
-                status: {
-                    type: String,
-                    default: "packing"
-                },
-            }
         ],
 
     charge: {
@@ -50,7 +23,7 @@ const order = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    addres: {
+    address: {
 
         house: {
             type: String,
@@ -73,6 +46,11 @@ const order = new mongoose.Schema({
             default: 0
         }
     },
+    orderCreationId:
+     { type: String },
+    razorpayPaymentId: { type: String },
+    razorpayOrderId: { type: String },
+    razorpaySignature: { type: String },
     orderDate: {
         type: Date,
         default: Date.now()
